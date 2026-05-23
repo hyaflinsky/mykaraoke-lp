@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="robots" content="index,follow" />
+
+<title>マイカラオケ｜歌った曲を、自分だけの一冊に。</title>
+<meta name="description" content="カラオケで歌った曲の点数・録音・メモを一冊のノートに。完全無料・登録不要・データは端末内のみ。" />
+
+<!-- OGP -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="マイカラオケ｜歌った曲を、自分だけの一冊に。" />
+<meta property="og:description" content="点数・録音・メモを一冊のノートに。完全無料・登録不要・データは端末内のみ。" />
+<meta property="og:site_name" content="マイカラオケ" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Fonts (アプリと同じ M PLUS Rounded 1c) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  /* ───────── Tokens (テーマカラー: #E24B4A) ───────── */
+  :root {
+    --brand:        #E24B4A;
+    --brand-deep:   #C83A39;
+    --brand-tint:   #FDECEB;
+    --ink:          #1A1A1A;
+    --ink-2:        #4A4A4A;
+    --ink-3:        #8A8A8A;
+    --bg:           #FFFFFF;
+    --bg-soft:      #FAFAFA;
+    --line:         #ECECEC;
+    --r-md:         12px;
+    --r-lg:         18px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "M PLUS Rounded 1c", -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ───────── Layout ───────── */
+  .wrap {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ───────── Top brand bar ───────── */
+  .top {
+    padding: 22px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .top .name {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .top .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+
+  /* ───────── Hero ───────── */
+  .hero {
+    padding: 28px 0 18px;
+    text-align: center;
+  }
+  .icon-frame {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 22px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 36px -18px rgba(226,75,74,0.20),
+                0 4px 12px -4px rgba(0,0,0,0.06);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  /* アプリアイコンと同じ「白地に45度傾いた赤マイク」モチーフ */
+  .mic {
+    width: 64px;
+    height: 64px;
+  }
+
+  h1.title {
+    font-weight: 800;
+    font-size: clamp(32px, 8vw, 46px);
+    line-height: 1.18;
+    letter-spacing: 0.02em;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .tagline {
+    font-size: clamp(15px, 4vw, 17px);
+    color: var(--ink-2);
+    margin: 0 auto 6px;
+    max-width: 32ch;
+    font-weight: 500;
+  }
+  .sub {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin: 0 0 26px;
+  }
+
+  /* ───────── Store badges (ファーストビュー内) ───────── */
+  .stores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 16px;
+  }
+  .store-link {
+    display: inline-block;
+    transition: transform 0.18s ease, filter 0.18s ease;
+    will-change: transform;
+  }
+  .store-link:hover { transform: translateY(-2px); }
+  .store-link:active { transform: translateY(0); filter: brightness(0.96); }
+  .store-link img {
+    height: 54px;
+    width: auto;
+  }
+  @media (min-width: 520px) {
+    .stores { flex-direction: row; justify-content: center; gap: 14px; }
+    .store-link img { height: 58px; }
+  }
+
+  /* ───────── Trust strip ───────── */
+  .trust {
+    margin: 14px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .trust span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .trust .check {
+    width: 12px; height: 12px;
+    color: var(--brand);
+    flex: 0 0 auto;
+  }
+
+  /* ───────── Divider ───────── */
+  .divider {
+    margin: 48px auto;
+    width: 36px;
+    height: 2px;
+    background: var(--brand);
+    border-radius: 2px;
+    opacity: 0.85;
+  }
+
+  /* ───────── Features ───────── */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+  @media (min-width: 640px) {
+    .features { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 22px 20px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    border-color: rgba(226,75,74,0.35);
+    transform: translateY(-2px);
+  }
+  .card .badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--brand-tint);
+    color: var(--brand);
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+  }
+  .card .badge svg { width: 18px; height: 18px; }
+  .card h3 {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .card p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 13.5px;
+    line-height: 1.75;
+  }
+
+  /* ───────── Bottom CTA ───────── */
+  .cta-bottom {
+    margin: 40px 0 16px;
+    text-align: center;
+  }
+  .cta-bottom .label {
+    font-weight: 700;
+    font-size: clamp(18px, 5vw, 22px);
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ───────── Footer ───────── */
+  footer {
+    margin-top: 32px;
+    padding: 24px 0 32px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ink-3);
+    font-size: 12.5px;
+  }
+  footer a {
+    color: var(--ink-2);
+    transition: color 0.2s ease;
+  }
+  footer a:hover { color: var(--brand); }
+  .foot-links {
+    margin: 0 0 12px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .copy { opacity: 0.85; }
+
+  /* ───────── Entrance ───────── */
+  .fade {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: rise 0.6s ease forwards;
+  }
+  .d1 { animation-delay: 0.04s; }
+  .d2 { animation-delay: 0.14s; }
+  .d3 { animation-delay: 0.24s; }
+  .d4 { animation-delay: 0.34s; }
+  .d5 { animation-delay: 0.44s; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="top fade d1">
+      <span class="dot"></span>
+      <span class="name">マイカラオケ</span>
+    </header>
+
+    <!-- ───────── HERO ───────── -->
+    <section class="hero">
+      <!-- アプリと同じ意匠：白地に45度傾いた赤マイク -->
+      <div class="icon-frame fade d1" aria-hidden="true">
+        <svg class="mic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(32 32) rotate(-45) translate(-12 -22)">
+            <!-- グリル -->
+            <circle cx="12" cy="12" r="12" fill="#E24B4A"/>
+            <!-- 金属メッシュ -->
+            <line x1="2" y1="8"  x2="22" y2="8"  stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
+            <line x1="1" y1="12" x2="23" y2="12" stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
+            <line x1="2" y1="16" x2="22" y2="16" stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
+            <!-- 接続リング -->
+            <rect x="8"  y="24"  width="8" height="2" rx="0.6" fill="#C83A39"/>
+            <!-- 胴体 -->
+            <path d="M 8.5 26 L 15.5 26 L 15 44 L 9 44 Z" fill="#E24B4A"/>
+            <!-- 底 -->
+            <rect x="8.8" y="43" width="6.4" height="1.2" rx="0.4" fill="#C83A39"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1 class="title fade d2">マイカラオケ</h1>
+      <p class="tagline fade d3">歌った曲を、自分だけの一冊に。</p>
+      <p class="sub fade d3">点数・録音・メモを、ひとつのノートに記録。</p>
+
+      <div class="stores fade d4">
+        <a class="store-link"
+           href="https://apps.apple.com/jp/app/%E3%83%9E%E3%82%A4%E3%82%AB%E3%83%A9%E3%82%AA%E3%82%B1/id6763885932"
+           target="_blank" rel="noopener"
+           aria-label="App Store でダウンロード">
+          <img src="./storeicon/app-store.svg" alt="App Store でダウンロード" />
+        </a>
+        <a class="store-link"
+           href="https://play.google.com/store/apps/details?id=io.github.hyaflinsky.mykaraoke&pcampaignid=web_share"
+           target="_blank" rel="noopener"
+           aria-label="Google Play で手に入れよう">
+          <img src="./storeicon/google-play.svg" alt="Google Play で手に入れよう" />
+        </a>
+      </div>
+
+      <div class="trust fade d5">
+        <span>
+          <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          完全無料
+        </span>
+        <span>
+          <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          登録不要
+        </span>
+        <span>
+          <svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          データは端末内のみ
+        </span>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- ───────── Features ───────── -->
+    <section class="features">
+      <div class="card fade d2">
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 19V9M10 19V5M16 19v-7M22 19H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>点数を記録する</h3>
+        <p>歌った曲と点数をサッと一行で記録。同じ曲の伸びがグラフでひと目で分かります。</p>
+      </div>
+
+      <div class="card fade d3">
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>歌声を残す</h3>
+        <p>自慢の一曲はその場で録音。後日聴き返して、自分の歌い方を客観的に振り返ることができます。</p>
+      </div>
+
+      <div class="card fade d4">
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 3h11l3 3v15a0 0 0 0 1 0 0H5a0 0 0 0 1 0 0V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M8 11h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>メモを添える</h3>
+        <p>「サビが少し早かった」「キーを-2に」など、次回への気づきを曲ごとに自由に残せます。</p>
+      </div>
+    </section>
+
+    <!-- ───────── Bottom CTA ───────── -->
+    <section class="cta-bottom">
+      <p class="label">今夜の一曲から、始めよう。</p>
+      <div class="stores">
+        <a class="store-link"
+           href="https://apps.apple.com/jp/app/%E3%83%9E%E3%82%A4%E3%82%AB%E3%83%A9%E3%82%AA%E3%82%B1/id6763885932"
+           target="_blank" rel="noopener"
+           aria-label="App Store でダウンロード">
+          <img src="./storeicon/app-store.svg" alt="App Store でダウンロード" />
+        </a>
+        <a class="store-link"
+           href="https://play.google.com/store/apps/details?id=io.github.hyaflinsky.mykaraoke&pcampaignid=web_share"
+           target="_blank" rel="noopener"
+           aria-label="Google Play で手に入れよう">
+          <img src="./storeicon/google-play.svg" alt="Google Play で手に入れよう" />
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-links">
+        <a href="https://hyaflinsky.github.io/mykaraoke-privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+        <a href="mailto:hyaflinsky@gmail.com">お問い合わせ</a>
+      </div>
+      <div class="copy">© 2026 マイカラオケ 開発者</div>
+    </footer>
+
+  </div>
+</body>
+</html>
