@@ -100,10 +100,12 @@
     overflow: hidden;
   }
   /* アプリアイコンと同じ「白地に45度傾いた赤マイク」モチーフ */
-  .mic {
-    width: 64px;
-    height: 64px;
-  }
+  .icon-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
   h1.title {
     font-weight: 800;
@@ -292,25 +294,10 @@
 
     <!-- ───────── HERO ───────── -->
     <section class="hero">
-      <!-- アプリと同じ意匠：白地に45度傾いた赤マイク -->
+     
       <div class="icon-frame fade d1" aria-hidden="true">
-        <svg class="mic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(32 32) rotate(-45) translate(-12 -22)">
-            <!-- グリル -->
-            <circle cx="12" cy="12" r="12" fill="#E24B4A"/>
-            <!-- 金属メッシュ -->
-            <line x1="2" y1="8"  x2="22" y2="8"  stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
-            <line x1="1" y1="12" x2="23" y2="12" stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
-            <line x1="2" y1="16" x2="22" y2="16" stroke="#fff" stroke-width="0.9" stroke-linecap="round" opacity="0.32"/>
-            <!-- 接続リング -->
-            <rect x="8"  y="24"  width="8" height="2" rx="0.6" fill="#C83A39"/>
-            <!-- 胴体 -->
-            <path d="M 8.5 26 L 15.5 26 L 15 44 L 9 44 Z" fill="#E24B4A"/>
-            <!-- 底 -->
-            <rect x="8.8" y="43" width="6.4" height="1.2" rx="0.4" fill="#C83A39"/>
-          </g>
-        </svg>
-      </div>
+  <img src="./icon.png" alt="マイカラオケ" />
+</div>
 
       <h1 class="title fade d2">マイカラオケ</h1>
       <p class="tagline fade d3">歌った曲を、自分だけの一冊に。</p>
