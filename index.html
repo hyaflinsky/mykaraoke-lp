@@ -399,5 +399,27 @@
     </footer>
 
   </div>
-</body>
+
+  <!-- ───────── Analytics (GoatCounter) ───────── -->
+<script>
+  // ストアボタンのクリックを計測
+  window.addEventListener('load', function() {
+    document.querySelectorAll('.store-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var label = this.getAttribute('aria-label') || '';
+        var store = label.indexOf('App Store') !== -1 ? 'appstore' : 'googleplay';
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({
+            path:  'click-' + store,
+            title: 'Store button: ' + store,
+            event: true,
+          });
+        }
+      });
+    });
+  });
+</script>
+<script data-goatcounter="https://mykaraoke.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+  </body>
 </html>
